@@ -1,0 +1,30 @@
+{
+  "name": "scoped-styles",
+  "version": "0.5.0",
+  "description": "Minimal, fast css-in-js",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacobdejean/scoped-styles.git"
+  },
+  "keywords": [
+    "css",
+    "css-in-js",
+    "scoped"
+  ],
+  "author": "Jacob DeJean",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jacobdejean/scoped-styles/issues"
+  },
+  "homepage": "https://github.com/jacobdejean/scoped-styles#readme",
+  "dependencies": {
+    "yeast": "github:jacobdejean/safeyeast"
+  },
+  "devDependencies": {
+    "@types/yeast": "^0.1.1"
+  }
+}
