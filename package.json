@@ -3,8 +3,10 @@
   "version": "0.5.0",
   "description": "Minimal, fast css-in-js",
   "main": "index.ts",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc --build"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,7 @@
   },
   "homepage": "https://github.com/jacobdejean/scoped-styles#readme",
   "dependencies": {
+    "typescript": "^4.8.4",
     "yeast": "github:jacobdejean/safeyeast"
   },
   "devDependencies": {
