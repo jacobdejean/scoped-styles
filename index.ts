@@ -9,49 +9,44 @@ export default class Style {
     class: string;
     rules: string[];
 
-    constructor(parent: string, rules: string[], properties: string) {
-        this.class = parent;
-        this.styles = properties;
-        this.rules = [];
-
-        parent === '' && (this.class = 'c-' + yeast());
-        parent === '@' && (this.class = '');
-
-        for(const rule of rules) {
-            this.rules.push((this.class.length > 0 ? '.' : '') + this.class + rule);
-        }
+    constructor(options: { parent?: string, rules?: string[], properties: string} ) {
+        this.class = options.parent ?? 'c-' + yeast();
+        this.styles = options.properties;
+        options.parent === '@' && (this.class = '');
+        this.rules = (options.rules ?? ['']).map(rule => `${(this.class.length > 0 ? '.' : '')}${this.class} ${rule}`);
 
         stylesheet.registerStyle(this);
     }
 }
 
 export class Stylesheet {
-    styles: Style[];
-    exportedSheet: string;
+    styles: Style[];    
 
     constructor() {
         this.styles = [];
-        this.exportedSheet = '';
     }
 
     registerStyle(style: Style) {
         this.styles.push(style);
     }
 
-    async genSheet() {
+    genSheet() {
         let output = '';
 
-        this.styles = this.styles.reverse();
         for(const style of this.styles) {
             for(const rule of style.rules) {
-                output += rule + ',\n'
+                output += `${rule.trim()},\n`
             }
             output = output.substring(0, output.length - 2);
-            output += '{' + style.styles + '}\n';
+            output += ' {' + style.styles + '}\n';
         }
 
-        this.exportedSheet = output;
+        return output;
     }
 }
 
 export const stylesheet: Stylesheet = new Stylesheet();
+
+export const generate = () => new Promise(resolve => {
+    resolve(stylesheet.genSheet())
+})
